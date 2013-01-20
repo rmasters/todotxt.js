@@ -14,7 +14,7 @@
         }
     ],
     "licenses": ["MIT"],
-    "main": "./src/todotxt.js",
+    "main": "todotxt.js",
     "repository": {
         "type": "git",
         "url": "https://github.com/rmasters/todotxt.js.git"
