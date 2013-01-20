@@ -1,0 +1,28 @@
+{
+    "name": "todo.txt",
+    "version": "0.0.1",
+    "description": "A todo.txt-format parser and generator",
+    "author": "Ross Masters (http://rossmasters.com/)",
+    "keywords": ["todo", "todo.txt"],
+    "homepage": "https://github.com/rmasters/todotxt.js",
+    "bugs": "https://github.com/rmasters/todotxt.js/issues",
+    "maintainers": [
+        {
+            "name": "Ross Masters",
+            "email": "ross@rossmasters.com",
+            "web": "http://rossmasters.com/"
+        }
+    ],
+    "licenses": ["MIT"],
+    "main": "./src/todotxt.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rmasters/todotxt.js.git"
+    },
+    "devDependencies": {
+        "jasmine-node": "1.0"
+    },
+    "scripts": {
+        "test": "node ./node-modules/jasmine-node/bin/jasmine-node"
+    }
+}

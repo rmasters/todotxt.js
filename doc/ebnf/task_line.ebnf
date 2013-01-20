@@ -1,0 +1,26 @@
+TaskLine        ::= (Completed | Priority?) CreatedDate? Task
+Task            ::= TaskPart ( ' ' TaskPart )*
+TaskPart        ::= Context | Project | MetaData | Description
+
+/* Complete Tasks
+   Rule 1: If a task starts with an x (case-sensitive lowercase) followed directly by a space, it is complete.
+   Rule 2: The date of completion appears directly after the x, separated by a space.
+*/
+Completed       ::= 'x ' date
+/* Rule 1: If a priority exists it always appears first. */
+Priority        ::= '(' [A-Z] ')'
+/* Rule 2: If there is no priority, the creation date appears first. If the creation date exists, it should be in the
+   format YYYY-MM-DD.
+*/
+CreatedDate     ::= date
+
+/* Rule 3: A project or context contains any non-whitespace character and must end in an alphanumeric or ‘_’. */
+Context         ::= '@' Tag
+Project         ::= '+' Tag
+Tag             ::= [^\s]+[A-Za-z0-9_]
+/* There are no specific rules for MetaData. I have assumed the same as context/project for the key. */
+MetaData        ::= Tag ':' [^\s]+
+Description     ::= [^\s]+
+
+/* Year is a 4 digit year, Month and Date are 0-padded (2013-01-20) */
+date            ::= [1-9][0-9][0-9][0-9] '-' [0-1][0-9] '-' [0-3][0-9]
