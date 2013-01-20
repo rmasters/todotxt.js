@@ -1,6 +1,6 @@
 # todotxt.js
 
-[[![Build Status](https://travis-ci.org/rmasters/todotxt.js.png?branch=master)](https://travis-ci.org/rmasters/todotxt.js)]
+[![Build Status](https://travis-ci.org/rmasters/todotxt.js.png?branch=master)](https://travis-ci.org/rmasters/todotxt.js)
 
 A JavaScript parser and container for the TODO files in the [todo.txt format][format].
 
