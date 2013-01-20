@@ -10,6 +10,8 @@ This project does things quite similarly to [jsTodoTxt][jsTodoTxt]; it also:
 
 > Why not fork? I wanted to have a bash at building a JS lib from scratch :)
 
-Primarily developed for a [todotxt-demo][https://github.com/rmasters/todotxt-demo] app.
+Primarily developed for a [todotxt-demo][todotxt-demo] app.
 
 [format]: https://github.com/ginatrapani/todo.txt-cli/wiki/The-Todo.txt-Format
+[jsTodoTxt]: https://github.com/jmhobbs/jsTodoTxt
+[todotxt-demo]: https://github.com/rmasters/todotxt-demo
