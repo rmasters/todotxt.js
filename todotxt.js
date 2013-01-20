@@ -478,3 +478,9 @@ var todotxt = (function () {
         'TodoItem': TodoItem
     };
 }(this));
+
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = exports = todotxt;
+} else if (typeof exports !== "undefined") {
+    exports = todotxt;
+}
