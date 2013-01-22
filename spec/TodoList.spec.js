@@ -64,4 +64,14 @@ describe("TodoList", function() {
         list.parse(file)
         expect(list.items.length).toEqual(2);
     });
+
+    it ("should append text to items", function() {
+        list.add("Hello");
+
+        item = list.append(1, "World");
+        expect(item).not.toBeFalsy();
+        expect(item.text).toEqual("Hello World");
+
+        expect(list.append(0, "Test")).toBeFalsy();
+    });
 });

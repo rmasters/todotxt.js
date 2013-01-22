@@ -153,4 +153,11 @@ describe("TodoItem", function() {
         item = item.parse("x 2013-01-20 2012-12-11 +Launch release 3.1");
         expect(item.toString()).toEqual("x 2013-01-20 2012-12-11 +Launch release 3.1");
     });
+
+    it ("should be able to append text to itself", function() {
+        item = item.parse("Hello");
+        item = item.append("World");
+        expect(item).not.toBeFalsy();
+        expect(item.text).toEqual("Hello World");
+    });
 });

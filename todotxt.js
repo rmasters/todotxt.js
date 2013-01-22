@@ -165,6 +165,7 @@ var todotxt = (function () {
      */
     TodoItem.prototype.append = function (text) {
         this.text += " " + text;
+        return this;
     };
 
     /**
@@ -595,6 +596,22 @@ var todotxt = (function () {
      */
     TodoList.prototype.source = function () {
         return this.filename || 'memory';
+    };
+    
+    /**
+     * Append to an item
+     * @param {Integer} id - Task item id to append to
+     * @param {String} text - Text to append to the task
+     * @return {TodoItem|Boolean} - The TodoItem result, or false if not found. 
+     */
+    TodoList.prototype.append = function (id, text) {
+        var item = this.findById(id);
+
+        if (false !== item) {
+            return item.append(text);
+        } else {
+            return item;
+        }
     };
 
     return {
