@@ -4,6 +4,37 @@
 
 A JavaScript parser and container for the TODO files in the [todo.txt format][format].
 
+## From CLI to JavaScript
+
+A mapping of what to do for each CLI command (and an implementation status).
+
+*   **Multiple lists** - multiple in-memory lists are supported through multiple
+    instances of `TodoList`. Todo: Ability to persist and retrieve from a file.
+*   **`add|a`** - Implemented. `TodoList.add(task)`
+*   **`addm`** - Will be implemented as a file reader. Call `TodoList.add` lots.
+*   **`addto`** - Call `TodoList.add` on the correct `TogoList` instance.
+*   **`append|app`** - Implemented: `TodoList.append(id, text)`,
+    `TodoItem.append(text)`.
+*   **`archive`** - Todo with file management.
+*   **`deduplicate`** - Todo
+*   **`del|rm`** - Todo
+*   **`depri|dp`** - Todo
+*   **`do`** - Implemented: `TodoList.findById(id).complete()`. Todo:
+    `TodoList.do(1, 2, 3)`
+*   **`list|ls`** - Implemented: `TodoList.list(term, priority, case_sensitive, completed)`.
+    Todo: helpers/aliases (below)
+*   **`listall|lsa`** - Current: `TodoList.list(null, null, null, true)` Todo:
+    `TodoList.listAll(term, priority, case)` todo
+*   **`listcon|lsc`** - Todo. (Current: `TodoList.indexes.context`)
+*   **`listproj|lsprj`** - Todo. (Current: `TodoList.indexes.project`)
+*   **`move`** - Todo with file management.
+*   **`prepend|prep`** - Todo.
+*   **`pri|p`** - `TodoItem.priority = "A"`, `TodoList.findById(1).priority = "A"`
+*   **`replace`** - `TodoList.findById(1).parse("New task text")`. Will alias.
+*   **`report`** - Todo.
+
+## About
+
 This project does things quite similarly to [jsTodoTxt][jsTodoTxt]; it also:
 
 -   Has a list container that allows for actions on the list (such as add, append, pri, sorting etc.) from the CLI tool.
