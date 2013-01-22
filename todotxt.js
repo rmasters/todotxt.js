@@ -1,6 +1,7 @@
 /**
  * todotxt.js 0.0.1
  * @overview A parser/generator for the todo.txt format
+ * @project todotxt
  * @author Ross Masters <ross@rossmasters.com>
  * @version 0.0.1
  * @license todotxt.js may be freely distributed under the MIT license
@@ -11,7 +12,8 @@ var todotxt = (function () {
     "use strict";
 
     /**
-     * An individual task
+     * @class
+     * @classdesc An individual task
      * @constructor
      * @param {String} [item=undefined] - The task as a line of text
      */
@@ -131,6 +133,14 @@ var todotxt = (function () {
     };
 
     /**
+     * Is the task complete?
+     * @return {Boolean} - True if a completion date is set.
+     */
+    TodoItem.prototype.isCompleted = function () {
+        return this.completedAt instanceof Date;
+    };
+
+    /**
      * Get the task line
      * @param {Boolean} [with_id=false] Include the task id in output
      * @return {String} Task as a string
@@ -148,13 +158,18 @@ var todotxt = (function () {
             this.text;
     };
 
-    TodoItem.prototype.isCompleted = function () {
-        return this.completedAt instanceof Date;
+    /**
+     * Append to the .text of the item with a preceding space
+     * @param {String} text - Text to append
+     * @return {TodoItem}
+     */
+    TodoItem.prototype.append = function (text) {
+        this.text += " " + text;
     };
 
-
     /**
-     * A list of task items
+     * @class
+     * @classdesc A list of task items
      * @constructor
      */
     function TodoList() {
@@ -471,6 +486,16 @@ var todotxt = (function () {
      */
     TodoList.prototype.source = function () {
         return this.filename || 'memory';
+    };
+    
+    /**
+     * Append to an item
+     * @param {Integer} id - Task item id to append to
+     * @param {String} text - Text to append to the task
+     * @return {TodoItem|Boolean} - The TodoItem result, or false if not found. 
+     */
+    TodoList.prototype.append = function (id, text) {
+        return this.findById(id).append(text);
     };
 
     return {
