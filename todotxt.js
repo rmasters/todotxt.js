@@ -209,51 +209,53 @@ var todotxt = (function () {
 
         return this.items[this.indexes.id[id]];
     };
-
+    
     /**
-     * Ensure an item's id, context and project are indexed
-     * @private
-     * @property {TodoItem} item - Item to index
+     * Append to an item
+     * @param {Integer} id - Task item id to append to
+     * @param {String} text - Text to append to the task
+     * @return {TodoItem|Boolean} - Task or false if not found
      */
-    TodoList.prototype.index = function (item) {
-        var prj,
-            p,
-            ctx,
-            c;
-
-        // Check item has an id
-        if (null === item.id) {
-            item.id = this.items.length;
-        }
-
-        // Check item id is in id->{items[idx]} index
-        if (!this.indexes.id.hasOwnProperty(item.id)) {
-            this.indexes.id[item.id] = this.items.indexOf(item);
-        }
-
-        // Check item's projects are in project->{items[idx]} index
-        for (p = 0; p < item.projects.length; p += 1) {
-            prj = item.projects[p];
-            if (!this.indexes.project.hasOwnProperty(prj)) {
-                this.indexes.project[prj] = [];
-            }
-            if (this.indexes.project[prj].indexOf(this.indexes.id[item.id]) === -1) {
-                this.indexes.project[prj].push(this.indexes.id[item.id]);
-            }
-        }
-
-        // Check item's contexts are in context->{items[idx]} index
-        for (c = 0; c < item.contexts.length; c += 1) {
-            ctx = item.contexts[c];
-            if (!this.indexes.context.hasOwnProperty(ctx)) {
-                this.indexes.context[ctx] = [];
-            }
-            if (this.indexes.context[ctx].indexOf(this.indexes.id[item.id]) === -1) {
-                this.indexes.context[ctx].push(this.indexes.id[item.id]);
-            }
-        }
+    TodoList.prototype.append = function (id, text) {
+        return this.findById(id).append(text);
     };
-
+    
+    /**
+     * Prepend text to a task (with a trailing space)
+     * @todo
+     * @param {Integer} id - Task id
+     * @param {String} text - Text to prepend
+     * @return {TodoItem|Boolean} - Task or false if not found
+     */
+    TodoList.prototype.prepend = function (id, text) {
+    };    
+    
+    /**
+     * Deduplicate a list
+     * @todo
+     * @return {TodoList}
+     */
+    TodoList.prototype.deduplicate = function () {
+    };
+   
+    /**
+     * Remove an item from the list
+     * @todo
+     * @param {Integer} id - Task item id to remove
+     * @return {TodoList}
+     */
+    TodoList.prototype.remove = function (id) {
+    };
+    
+    /**
+     * Complete one or more items
+     * @todo
+     * @param {Integer} [...] - Task item id(s) to deprioritise
+     * @return {TodoList}
+     */
+    TodoList.prototype.do = function (id) {
+    };
+    
     /**
      * List all incomplete items in the list
      * @param {String|Array} [term=[]] - Terms to match against
@@ -357,6 +359,113 @@ var todotxt = (function () {
 
         return items;
     };
+    
+    /**
+     * List all tasks (including completed tasks)
+     * @todo
+     * @param {String|Array} [term=[]] - Terms to match against
+     * @param {String|Array} [priority=[]] - Priorities the items should have
+     * @param {Boolean} [case_sensitive=false] - If terms are case sensitive
+     */
+    TodoList.prototype.listAll = function (term, priority, case_sensitive) {
+    };
+    
+    /**
+     * List contexts of task items
+     * @todo
+     * @return {Array}
+     */
+    TodoList.prototype.contexts = function () {
+    };
+    
+    /**
+     * List projects of task items
+     * @todo
+     * @return {Array}
+     */
+    TodoList.prototype.projects = function () {
+    };
+    
+    /**
+     * Deprioritise an item
+     * @todo
+     * @param {Integer} id - Task item id to deprioritise
+     * @return {TodoItem|Boolean} - Task or false if not found
+     */
+    TodoList.prototype.deprioritise = function (id) {
+    };
+    
+    /**
+     * Prioritise a task
+     * @todo
+     * @param {Integer} id - Task id
+     * @param {String} priority - Priority to set
+     * @return {TodoItem|Boolean} - Task or false if not found
+     */
+    TodoList.prototype.prioritise = function (id, priority) {
+    };
+    
+    /**
+     * Replace the text of an item
+     * @todo
+     * @param {Integer} id - Task id
+     * @param {String} text - New task text
+     * @return {TodoItem|Boolean} - Task or false if not found
+     */
+    TodoList.prototype.replace = function (id, task) {
+    };
+    
+    /**
+     * Generate a report on tasks
+     * @todo
+     */
+    TodoList.prototype.report = function () {
+    };
+    
+    /**
+     * Ensure an item's id, context and project are indexed
+     * @private
+     * @property {TodoItem} item - Item to index
+     */
+    TodoList.prototype.index = function (item) {
+        var prj,
+            p,
+            ctx,
+            c;
+
+        // Check item has an id
+        if (null === item.id) {
+            item.id = this.items.length;
+        }
+
+        // Check item id is in id->{items[idx]} index
+        if (!this.indexes.id.hasOwnProperty(item.id)) {
+            this.indexes.id[item.id] = this.items.indexOf(item);
+        }
+
+        // Check item's projects are in project->{items[idx]} index
+        for (p = 0; p < item.projects.length; p += 1) {
+            prj = item.projects[p];
+            if (!this.indexes.project.hasOwnProperty(prj)) {
+                this.indexes.project[prj] = [];
+            }
+            if (this.indexes.project[prj].indexOf(this.indexes.id[item.id]) === -1) {
+                this.indexes.project[prj].push(this.indexes.id[item.id]);
+            }
+        }
+
+        // Check item's contexts are in context->{items[idx]} index
+        for (c = 0; c < item.contexts.length; c += 1) {
+            ctx = item.contexts[c];
+            if (!this.indexes.context.hasOwnProperty(ctx)) {
+                this.indexes.context[ctx] = [];
+            }
+            if (this.indexes.context[ctx].indexOf(this.indexes.id[item.id]) === -1) {
+                this.indexes.context[ctx].push(this.indexes.id[item.id]);
+            }
+        }
+    };
+
 
     /**
      * Check if a term definition matches a task
@@ -486,16 +595,6 @@ var todotxt = (function () {
      */
     TodoList.prototype.source = function () {
         return this.filename || 'memory';
-    };
-    
-    /**
-     * Append to an item
-     * @param {Integer} id - Task item id to append to
-     * @param {String} text - Text to append to the task
-     * @return {TodoItem|Boolean} - The TodoItem result, or false if not found. 
-     */
-    TodoList.prototype.append = function (id, text) {
-        return this.findById(id).append(text);
     };
 
     return {
