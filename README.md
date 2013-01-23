@@ -1,6 +1,6 @@
 # todotxt.js
 
-[![Build Status](https://travis-ci.org/rmasters/todotxt.js.png?branch=master)](https://travis-ci.org/rmasters/todotxt.js)
+master: [![Build Status][travisci-img-master]][travisci] develop: [![Build Status][travisci-img-develop]][travisci]
 
 A JavaScript parser and container for the TODO files in the [todo.txt format][format].
 
@@ -44,3 +44,6 @@ Primarily developed for a [todotxt-demo][todotxt-demo] app.
 [format]: https://github.com/ginatrapani/todo.txt-cli/wiki/The-Todo.txt-Format
 [jsTodoTxt]: https://github.com/jmhobbs/jsTodoTxt
 [todotxt-demo]: https://github.com/rmasters/todotxt-demo
+[travisci-img-master]: https://travis-ci.org/rmasters/todotxt.js.png?branch=master
+[travisci-img-develop]: https://travis-ci.org/rmasters/todotxt.js.png?branch=develop
+[travisci]: https://travis-ci.org/rmasters/todotxt.js
