@@ -84,4 +84,14 @@ describe("TodoList", function() {
 
         expect(list.prepend(0, "Test")).toBeFalsy();
     });
+
+    it ("should deprioritise items", function() {
+        list.add("(A) Important stuff");
+
+        item = list.deprioritise(1);
+        expect(item).not.toBeFalsy();
+        expect(item.priority).toBeNull();
+
+        expect(list.deprioritise(0)).toBeFalsy();
+    });
 });

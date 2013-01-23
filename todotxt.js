@@ -179,6 +179,15 @@ var todotxt = (function () {
     };
 
     /**
+     * Deprioritise the item
+     * @return {TodoItem}
+     */
+    TodoItem.prototype.deprioritise = function () {
+        this.priority = null;
+        return this;
+    };
+
+    /**
      * @class
      * @classdesc A list of task items
      * @constructor
@@ -411,11 +420,16 @@ var todotxt = (function () {
     
     /**
      * Deprioritise an item
-     * @todo
      * @param {Integer} id - Task item id to deprioritise
      * @return {TodoItem|Boolean} - Task or false if not found
      */
     TodoList.prototype.deprioritise = function (id) {
+        var item = this.findById(id);
+        if (false !== item) {
+            return item.deprioritise();
+        } else {
+            return item;
+        }
     };
     
     /**

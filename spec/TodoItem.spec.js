@@ -165,4 +165,11 @@ describe("TodoItem", function() {
         item = item.prepend("Hello");
         expect(item.text).toEqual("Hello World");
     });
+
+    it ("should be able to deprioritise itself", function() {
+        item.parse("(A) Important stuff");
+        expect(item.priority).toEqual("A");
+        item = item.deprioritise();
+        expect(item.priority).toBeNull();
+    });
 });
