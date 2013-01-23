@@ -50,7 +50,7 @@ describe("TodoItem", function() {
         item.parse("(A) Panic-buy 18 litres of milk"); // It's snowing today
         expect(item.priority).toEqual('A');
         expect(item.text).toEqual("Panic-buy 18 litres of milk");
-    });
+    );
 
     it ("should not allow both a completion mark and a priority", function() {
         // By happen-stance the regex accepts the completion date first, and sets priority to null
@@ -157,7 +157,12 @@ describe("TodoItem", function() {
     it ("should be able to append text to itself", function() {
         item = item.parse("Hello");
         item = item.append("World");
-        expect(item).not.toBeFalsy();
+        expect(item.text).toEqual("Hello World");
+    });
+
+    it ("should be able to prepend text to itself", function() {
+        item = item.parse("World");
+        item = item.prepend("Hello");
         expect(item.text).toEqual("Hello World");
     });
 });

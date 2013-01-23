@@ -169,6 +169,16 @@ var todotxt = (function () {
     };
 
     /**
+     * Prepend to the .text of the item with a preceding space
+     * @param {String} text - Text to prepend
+     * @return {TodoItem}
+     */
+    TodoItem.prototype.prepend = function (text) {
+        this.text = text + " " + this.text;
+        return this;
+    };
+
+    /**
      * @class
      * @classdesc A list of task items
      * @constructor
@@ -218,17 +228,29 @@ var todotxt = (function () {
      * @return {TodoItem|Boolean} - Task or false if not found
      */
     TodoList.prototype.append = function (id, text) {
-        return this.findById(id).append(text);
+        var item = this.findById(id);
+
+        if (false !== item) {
+            return item.append(text);
+        } else {
+            return item;
+        }
     };
     
     /**
      * Prepend text to a task (with a trailing space)
-     * @todo
      * @param {Integer} id - Task id
      * @param {String} text - Text to prepend
      * @return {TodoItem|Boolean} - Task or false if not found
      */
     TodoList.prototype.prepend = function (id, text) {
+        var item = this.findById(id);
+
+        if (false !== item) {
+            return item.prepend(text);
+        } else {
+            return item;
+        }
     };    
     
     /**
@@ -596,22 +618,6 @@ var todotxt = (function () {
      */
     TodoList.prototype.source = function () {
         return this.filename || 'memory';
-    };
-    
-    /**
-     * Append to an item
-     * @param {Integer} id - Task item id to append to
-     * @param {String} text - Text to append to the task
-     * @return {TodoItem|Boolean} - The TodoItem result, or false if not found. 
-     */
-    TodoList.prototype.append = function (id, text) {
-        var item = this.findById(id);
-
-        if (false !== item) {
-            return item.append(text);
-        } else {
-            return item;
-        }
     };
 
     return {

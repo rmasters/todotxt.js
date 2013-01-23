@@ -24,7 +24,7 @@ A mapping of what to do for each CLI command (and an implementation status).
 -   `listcon|lsc` - Todo. (Current: `TodoList.indexes.context`)
 -   `listproj|lsprj` - Todo. (Current: `TodoList.indexes.project`)
 -   `move` - Todo with file management.
--   `prepend|prep` - Todo.
+-   `prepend|prep` - Implemented: `TodoList.prepend(id, text)`, `TodoItem.prepend(text)`.
 -   `pri|p` - `TodoItem.priority = "A"`, `TodoList.findById(1).priority = "A"`
 -   `replace` - `TodoList.findById(1).parse("New task text")`. Will alias.
 -   `report` - Todo.

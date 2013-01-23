@@ -74,4 +74,14 @@ describe("TodoList", function() {
 
         expect(list.append(0, "Test")).toBeFalsy();
     });
+
+    it ("should prepend text to items", function() {
+        list.add("World");
+
+        item = list.prepend(1, "Hello");
+        expect(item).not.toBeFalsy();
+        expect(item.text).toEqual("Hello World");
+
+        expect(list.prepend(0, "Test")).toBeFalsy();
+    });
 });
