@@ -94,4 +94,52 @@ describe("TodoList", function() {
 
         expect(list.deprioritise(0)).toBeFalsy();
     });
+
+    it ("should remove items from the list by id", function() {
+        list.add("Arf arf");
+
+        expect(list.items.length).toEqual(1);
+        item = list.remove(1);
+        expect(item).not.toBeFalsy();
+        expect(item.text).toEqual("Arf arf");
+        expect(list.items.length).toEqual(0);
+
+        // Non-ids should give a false
+        expect(list.remove(0)).toBeFalsy();
+    });
+
+    it ("should clean up the index after removing items from the list", function() {
+        item = list.add("Arf arf +learnwalrus @talktotheanimals");
+        expect(list.items.length).toEqual(1);
+        // id->index
+        expect(list.indexes.id[item.id]).toEqual(0);
+        // project->index[]
+        expect(list.indexes.project.hasOwnProperty('learnwalrus')).toBeTruthy();
+        expect(list.indexes.project['learnwalrus'][0]).toEqual(1);
+        // context->index[]
+        expect(list.indexes.context.hasOwnProperty('talktotheanimals')).toBeTruthy();
+        expect(list.indexes.context['talktotheanimals'][0]).toEqual(1);
+
+        // Add a second item
+        // Removing this item should only remove the first item's project and
+        // context indexes (not the whole index for the project/context).
+        var item2 = list.add("Arf arf arf +learnwalrus @talktotheanimals");
+        expect(list.indexes.id[item2.id]).toEqual(1);
+        expect(list.indexes.project['learnwalrus'][1]).toEqual(2);
+        expect(list.indexes.context['talktotheanimals'][1]).toEqual(2);
+        // Remove item2
+        var item2_id = item2.id;
+        item2 = list.remove(item2.id);
+        expect(item2.id).toBeNull();
+        expect(list.indexes.project.hasOwnProperty('learnwalrus')).toBeTruthy();
+        expect(list.indexes.project['learnwalrus'].length).toEqual(1);
+        expect(list.indexes.context.hasOwnProperty('talktotheanimals')).toBeTruthy();
+        expect(list.indexes.context['talktotheanimals'].length).toEqual(1);
+
+        // Now remove the other item, which should clean up the indexes
+        list.remove(item.id);
+        expect(list.indexes.id.hasOwnProperty(item.id)).toBeFalsy();
+        expect(list.indexes.project.hasOwnProperty('learnwalrus')).toBeFalsy();
+        expect(list.indexes.context.hasOwnProperty('talktotheanimals')).toBeFalsy();
+    });
 });

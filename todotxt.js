@@ -242,7 +242,7 @@ var todotxt = (function () {
         if (false !== item) {
             return item.append(text);
         } else {
-            return item;
+            return false;
         }
     };
     
@@ -258,7 +258,7 @@ var todotxt = (function () {
         if (false !== item) {
             return item.prepend(text);
         } else {
-            return item;
+            return false;
         }
     };    
     
@@ -272,11 +272,21 @@ var todotxt = (function () {
    
     /**
      * Remove an item from the list
-     * @todo
      * @param {Integer} id - Task item id to remove
-     * @return {TodoList}
+     * @return {TodoItem|Boolean} - Task or false if not found
      */
     TodoList.prototype.remove = function (id) {
+        var item = this.findById(id);
+        if (false !== item) {
+            // Remove from items array
+            this.items.splice(this.indexes.id[id], 1);
+            // De-index
+            this.deindex(item);
+            item.id = null;
+            return item;
+        } else {
+            return false;
+        }
     };
     
     /**
@@ -486,8 +496,8 @@ var todotxt = (function () {
             if (!this.indexes.project.hasOwnProperty(prj)) {
                 this.indexes.project[prj] = [];
             }
-            if (this.indexes.project[prj].indexOf(this.indexes.id[item.id]) === -1) {
-                this.indexes.project[prj].push(this.indexes.id[item.id]);
+            if (this.indexes.project[prj].indexOf(item.id) === -1) {
+                this.indexes.project[prj].push(item.id);
             }
         }
 
@@ -497,12 +507,56 @@ var todotxt = (function () {
             if (!this.indexes.context.hasOwnProperty(ctx)) {
                 this.indexes.context[ctx] = [];
             }
-            if (this.indexes.context[ctx].indexOf(this.indexes.id[item.id]) === -1) {
-                this.indexes.context[ctx].push(this.indexes.id[item.id]);
+            if (this.indexes.context[ctx].indexOf(item.id) === -1) {
+                this.indexes.context[ctx].push(item.id);
             }
         }
     };
 
+    /**
+     * De-index an item
+     * @param {TodoItem} item - Item to de-index
+     * @return {TodoList}
+     */
+    TodoList.prototype.deindex = function(item) {
+        var prj,
+            prj_idx,
+            ctx,
+            ctx_idx;
+
+        // Remove the id->list_index entry
+        if (this.indexes.id.hasOwnProperty(item.id)) {
+            delete this.indexes.id[item.id];
+        }
+
+        // Remove project->id[] indexes for this item
+        for (prj = 0; prj < item.projects.length; prj += 1) {
+            prj_idx = this.indexes.project[item.projects[prj]].indexOf(item.id);
+            if (prj_idx !== -1) {
+                this.indexes.project[item.projects[prj]].splice(prj_idx, 1);
+
+                // Remove project index when no tasks left that use it
+                if (Object.keys(this.indexes.project[item.projects[prj]]).length == 0) {
+                    delete this.indexes.project[item.projects[prj]];
+                }
+            }
+        }
+
+        // Remove context->id[] indexes for this item
+        for (ctx = 0; ctx < item.contexts.length; ctx += 1) {
+            ctx_idx = this.indexes.context[item.contexts[ctx]].indexOf(item.id);
+            if (ctx_idx !== -1) {
+                this.indexes.context[item.contexts[ctx]].splice(ctx_idx, 1);
+
+                // Remove context index when no tasks left that use it
+                if (Object.keys(this.indexes.context[item.contexts[ctx]]).length == 0) {
+                    delete this.indexes.context[item.contexts[ctx]];
+                }
+            }
+        }
+
+        return this;
+    };
 
     /**
      * Check if a term definition matches a task

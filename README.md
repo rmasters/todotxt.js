@@ -16,7 +16,7 @@ A mapping of what to do for each CLI command (and an implementation status).
 -   `append|app` - Implemented: `TodoList.append(id, text)`, `TodoItem.append(text)`.
 -   `archive` - Todo with file management.
 -   `deduplicate` - Todo
--   `del|rm` - Todo
+-   `del|rm` - Implemented: `TodoList.remove(id)`
 -   `depri|dp` - Implemented: `TodoList.deprioritise(1)`, `TodoItem.deprioritise()`
 -   `do` - Implemented: `TodoList.findById(id).complete()`. Todo: `TodoList.do(1, 2, 3)`
 -   `list|ls` - Implemented: `TodoList.list(term, priority, case_sensitive, completed)`. Todo: helpers/aliases (below)
