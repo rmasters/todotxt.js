@@ -29,6 +29,18 @@ A mapping of what to do for each CLI command (and an implementation status).
 -   `replace` - `TodoList.findById(1).parse("New task text")`. Will alias.
 -   `report` - Todo.
 
+## Support
+
+This library aims to be both `<script>` and module compatible (so you can use it
+with node/rhino). I *think* it's CommonJS compatible at the moment - if it's not
+and you know how to make it so - please send a PR! Finding good information on
+this has been difficult.
+
+## Testing
+
+Tested with Jasmine - these can be run using SpecRunner.html which runs them in
+the browser, or by node using [node-jasmine][node-jasmine] (`npm test`).
+
 ## About
 
 This project does things quite similarly to [jsTodoTxt][jsTodoTxt]; it also:
@@ -47,3 +59,4 @@ Primarily developed for a [todotxt-demo][todotxt-demo] app.
 [travisci-img-master]: https://travis-ci.org/rmasters/todotxt.js.png?branch=master
 [travisci-img-develop]: https://travis-ci.org/rmasters/todotxt.js.png?branch=develop
 [travisci]: https://travis-ci.org/rmasters/todotxt.js
+[node-jasmine]: https://npmjs.org/package/jasmine-node
