@@ -295,7 +295,17 @@ var todotxt = (function () {
      * @param {Integer} [...] - Task item id(s) to deprioritise
      * @return {TodoList}
      */
-    TodoList.prototype.do = function (id) {
+    TodoList.prototype.do = function () {
+        var item;
+
+        for (var i = 0; i < arguments.length; i++) {
+            item = this.findById(arguments[i]);
+            if (false !== item) {
+                item.complete();
+            }
+        }
+
+        return this;
     };
     
     /**

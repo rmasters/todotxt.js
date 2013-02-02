@@ -142,4 +142,29 @@ describe("TodoList", function() {
         expect(list.indexes.project.hasOwnProperty('learnwalrus')).toBeFalsy();
         expect(list.indexes.context.hasOwnProperty('talktotheanimals')).toBeFalsy();
     });
+
+    it ("should complete tasks", function() {
+        item = list.add("Command hearts and minds");
+        
+        list.do(1);
+        expect(list.findById(1).isCompleted()).toBeTruthy();
+    });
+
+    it ("should be able to chain task completions", function() {
+        list.add("Command hearts and minds");
+        list.add("Inspire a generation");
+
+        list.do(1).do(2);
+        expect(list.findById(1).isCompleted()).toBeTruthy();
+        expect(list.findById(2).isCompleted()).toBeTruthy();
+    });
+
+    it ("should complete multiple tasks", function() {
+        list.add("Command hearts and minds");
+        list.add("Inspire a generation");
+
+        list.do(1, 2);
+        expect(list.findById(1).isCompleted()).toBeTruthy();
+        expect(list.findById(2).isCompleted()).toBeTruthy();
+    });
 });
