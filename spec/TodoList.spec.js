@@ -197,4 +197,24 @@ describe("TodoList", function() {
 
         expect(list.projects()).toEqual(['todotxt.js', 'Google']);
     });
+
+    it ("should deduplicate items", function() {
+        list.add("Jump around");
+        list.add("Jump up");
+        list.add("jump Around");
+        list.add("Jump up");
+        list.add("Get down");
+        expect(list.items.length).toEqual(5);
+
+        list.deduplicate();
+
+        expect(list.items.length).toEqual(3);
+
+        var items = list.listAll();
+        for (var i = 0; i < items.length; i++) {
+            items[i] = items[i].text;
+        }
+
+        expect(items).toEqual(['Get down', 'Jump around', 'Jump up']);
+    });
 });

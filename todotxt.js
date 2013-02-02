@@ -264,10 +264,42 @@ var todotxt = (function () {
     
     /**
      * Deduplicate a list
-     * @todo
      * @return {TodoList}
      */
     TodoList.prototype.deduplicate = function () {
+        var i_text,
+            changed = false;
+
+        do {
+            changed = false;
+            // For each item, check if the lowercase .text matches another
+            for (var i = 0; i < this.items.length; i++) {
+                // Lowercased
+                i_text = this.items[i].text.toLocaleLowerCase();
+
+                // For each item, if it matches, remove it
+                for (var j = 0; j < this.items.length; j++) {
+                    // Skip if it's the same item
+                    if (this.items[i].id === this.items[j].id) {
+                        continue;
+                    }
+
+                    // Remove if it matches (and restart as the list will be
+                    // altered)
+                    if (i_text === this.items[j].text.toLocaleLowerCase()) {
+                        this.remove(this.items[j].id);
+                        changed = true;
+                        break;
+                    }
+                }
+
+                if (changed) {
+                    break;
+                }
+            }
+        } while(changed);
+
+        return this;
     };
    
     /**
@@ -277,9 +309,10 @@ var todotxt = (function () {
      */
     TodoList.prototype.remove = function (id) {
         var item = this.findById(id);
-        if (false !== item) {
-            // Remove from items array
+        if (item) {
+            // Remove from items array (and re-index by ID)
             this.items.splice(this.indexes.id[id], 1);
+            this.reindex()
             // De-index
             this.deindex(item);
             item.id = null;
@@ -313,6 +346,7 @@ var todotxt = (function () {
      * @param {String|Array} [priority=[]] - Priorities the items should have
      * @param {Boolean} [case_sensitive=false] - If terms are case sensitive
      * @param {Boolean} [completed=false] - Include completed tasks
+     * @return {Array} - Item list
      */
     TodoList.prototype.list = function (term, priority, case_sensitive, completed) {
         var terms,
@@ -531,6 +565,19 @@ var todotxt = (function () {
                 this.indexes.context[ctx].push(item.id);
             }
         }
+    };
+
+    /**
+     * Re-index the list by ID
+     * @return {TodoList}
+     */
+    TodoList.prototype.reindex = function() {
+        this.indexes.id = {};
+        for (var i = 0; i < this.items.length; i++) {
+            this.indexes.id[this.items[i].id] = i;
+        }
+
+        return this;
     };
 
     /**
