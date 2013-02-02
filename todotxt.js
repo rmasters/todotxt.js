@@ -291,7 +291,7 @@ var todotxt = (function () {
     
     /**
      * Complete one or more items
-     * @param {Integer} [...] - Task item id(s) to deprioritise
+     * @param {Integer} [...] - Task item id(s) to complete
      * @return {TodoList}
      */
     TodoList.prototype.complete = function () {
@@ -453,12 +453,17 @@ var todotxt = (function () {
     
     /**
      * Prioritise a task
-     * @todo
      * @param {Integer} id - Task id
      * @param {String} priority - Priority to set
      * @return {TodoItem|Boolean} - Task or false if not found
      */
     TodoList.prototype.prioritise = function (id, priority) {
+        var item = this.findById(id);
+        if (false !== item) {
+            return item.priority = priority;
+        } else {
+            return item;
+        }
     };
     
     /**

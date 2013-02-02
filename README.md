@@ -25,7 +25,7 @@ A mapping of what to do for each CLI command (and an implementation status).
 -   `listproj|lsprj` - Todo. (Current: `TodoList.indexes.project`)
 -   `move` - Todo with file management.
 -   `prepend|prep` - Implemented: `TodoList.prepend(id, text)`, `TodoItem.prepend(text)`.
--   `pri|p` - `TodoItem.priority = "A"`, `TodoList.findById(1).priority = "A"`
+-   `pri|p` - `TodoItem.priority = "A"`, `TodoList.prioritise(1, "A")`
 -   `replace` - `TodoList.replace(1, "New task text")`.
 -   `report` - Todo.
 

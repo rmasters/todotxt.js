@@ -173,4 +173,12 @@ describe("TodoList", function() {
         list.replace(1, "Go for a jog");
         expect(list.findById(1).text).toEqual("Go for a jog");
     });
+
+    it ("should prioritise tasks", function() {
+        list.add("(B) Fire ze missiles");
+        expect(list.findById(1).priority).toEqual("B");
+
+        list.prioritise(1, "A");
+        expect(list.findById(1).priority).toEqual("A");
+    });
 });
