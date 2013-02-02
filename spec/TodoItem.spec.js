@@ -50,7 +50,7 @@ describe("TodoItem", function() {
         item.parse("(A) Panic-buy 18 litres of milk"); // It's snowing today
         expect(item.priority).toEqual('A');
         expect(item.text).toEqual("Panic-buy 18 litres of milk");
-    );
+    });
 
     it ("should not allow both a completion mark and a priority", function() {
         // By happen-stance the regex accepts the completion date first, and sets priority to null
