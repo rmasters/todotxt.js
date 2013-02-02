@@ -312,7 +312,7 @@ var todotxt = (function () {
         if (item) {
             // Remove from items array (and re-index by ID)
             this.items.splice(this.indexes.id[id], 1);
-            this.reindex()
+            this.reindex();
             // De-index
             this.deindex(item);
             item.id = null;
