@@ -20,9 +20,9 @@ A mapping of what to do for each CLI command (and an implementation status).
 -   `depri|dp` - Implemented: `TodoList.deprioritise(1)`, `TodoItem.deprioritise()`
 -   `do` - Implemented: `TodoList.findById(id).complete()`, `TodoList.complete(1, 2, 3)`
 -   `list|ls` - Implemented: `TodoList.list(term, priority, case_sensitive, completed)`. Todo: helpers/aliases (below)
--   `listall|lsa` - Current: `TodoList.list(null, null, null, true)` Todo: `TodoList.listAll(term, priority, case)` todo
--   `listcon|lsc` - Todo. (Current: `TodoList.indexes.context`)
--   `listproj|lsprj` - Todo. (Current: `TodoList.indexes.project`)
+-   `listall|lsa` - Implemented: `TodoList.listAll([term], [priority], [case])`
+-   `listcon|lsc` - Implemented: `TodoList.contexts()`
+-   `listproj|lsprj` - Implemented: `TodoList.projects()`
 -   `move` - Todo with file management.
 -   `prepend|prep` - Implemented: `TodoList.prepend(id, text)`, `TodoItem.prepend(text)`.
 -   `pri|p` - `TodoItem.priority = "A"`, `TodoList.prioritise(1, "A")`

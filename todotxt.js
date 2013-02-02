@@ -413,28 +413,28 @@ var todotxt = (function () {
     
     /**
      * List all tasks (including completed tasks)
-     * @todo
      * @param {String|Array} [term=[]] - Terms to match against
      * @param {String|Array} [priority=[]] - Priorities the items should have
      * @param {Boolean} [case_sensitive=false] - If terms are case sensitive
      */
     TodoList.prototype.listAll = function (term, priority, case_sensitive) {
+        return this.list(term, priority, case_sensitive, true);
     };
     
     /**
      * List contexts of task items
-     * @todo
      * @return {Array}
      */
     TodoList.prototype.contexts = function () {
+        return Object.keys(this.indexes.context);
     };
     
     /**
      * List projects of task items
-     * @todo
      * @return {Array}
      */
     TodoList.prototype.projects = function () {
+        return Object.keys(this.indexes.project);
     };
     
     /**

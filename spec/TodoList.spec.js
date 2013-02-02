@@ -181,4 +181,20 @@ describe("TodoList", function() {
         list.prioritise(1, "A");
         expect(list.findById(1).priority).toEqual("A");
     });
+
+    it ("should list all contexts", function() {
+        list.add("Fix a +todotxt.js @bug");
+        list.add("File missing +todotxt.js @features");
+        list.add("Find @bug in +Google");
+
+        expect(list.contexts()).toEqual(['bug', 'features']);
+    });
+
+    it ("should list all contexts", function() {
+        list.add("Fix a +todotxt.js @bug");
+        list.add("File missing +todotxt.js @features");
+        list.add("Find @bug in +Google");
+
+        expect(list.projects()).toEqual(['todotxt.js', 'Google']);
+    });
 });
