@@ -463,12 +463,18 @@ var todotxt = (function () {
     
     /**
      * Replace the text of an item
-     * @todo
      * @param {Integer} id - Task id
      * @param {String} text - New task text
      * @return {TodoItem|Boolean} - Task or false if not found
      */
     TodoList.prototype.replace = function (id, task) {
+        var item = this.findById(id);
+
+        if (false !== item) {
+            return item.parse(task);
+        } else {
+            return item;
+        }
     };
     
     /**

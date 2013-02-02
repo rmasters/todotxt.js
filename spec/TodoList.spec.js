@@ -167,4 +167,10 @@ describe("TodoList", function() {
         expect(list.findById(1).isCompleted()).toBeTruthy();
         expect(list.findById(2).isCompleted()).toBeTruthy();
     });
+
+    it ("should replace tasks", function() {
+        list.add("Go for a walk");
+        list.replace(1, "Go for a jog");
+        expect(list.findById(1).text).toEqual("Go for a jog");
+    });
 });

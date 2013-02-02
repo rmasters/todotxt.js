@@ -26,7 +26,7 @@ A mapping of what to do for each CLI command (and an implementation status).
 -   `move` - Todo with file management.
 -   `prepend|prep` - Implemented: `TodoList.prepend(id, text)`, `TodoItem.prepend(text)`.
 -   `pri|p` - `TodoItem.priority = "A"`, `TodoList.findById(1).priority = "A"`
--   `replace` - `TodoList.findById(1).parse("New task text")`. Will alias.
+-   `replace` - `TodoList.replace(1, "New task text")`.
 -   `report` - Todo.
 
 ## Support
