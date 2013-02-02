@@ -291,7 +291,6 @@ var todotxt = (function () {
     
     /**
      * Complete one or more items
-     * @todo
      * @param {Integer} [...] - Task item id(s) to deprioritise
      * @return {TodoList}
      */
