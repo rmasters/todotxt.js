@@ -146,7 +146,7 @@ describe("TodoList", function() {
     it ("should complete tasks", function() {
         item = list.add("Command hearts and minds");
         
-        list.do(1);
+        list.complete(1);
         expect(list.findById(1).isCompleted()).toBeTruthy();
     });
 
@@ -154,7 +154,7 @@ describe("TodoList", function() {
         list.add("Command hearts and minds");
         list.add("Inspire a generation");
 
-        list.do(1).do(2);
+        list.complete(1).complete(2);
         expect(list.findById(1).isCompleted()).toBeTruthy();
         expect(list.findById(2).isCompleted()).toBeTruthy();
     });
@@ -163,7 +163,7 @@ describe("TodoList", function() {
         list.add("Command hearts and minds");
         list.add("Inspire a generation");
 
-        list.do(1, 2);
+        list.complete(1, 2);
         expect(list.findById(1).isCompleted()).toBeTruthy();
         expect(list.findById(2).isCompleted()).toBeTruthy();
     });

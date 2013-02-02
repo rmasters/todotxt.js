@@ -18,7 +18,7 @@ A mapping of what to do for each CLI command (and an implementation status).
 -   `deduplicate` - Todo
 -   `del|rm` - Implemented: `TodoList.remove(id)`
 -   `depri|dp` - Implemented: `TodoList.deprioritise(1)`, `TodoItem.deprioritise()`
--   `do` - Implemented: `TodoList.findById(id).complete()`, `TodoList.do(1, 2, 3)`
+-   `do` - Implemented: `TodoList.findById(id).complete()`, `TodoList.complete(1, 2, 3)`
 -   `list|ls` - Implemented: `TodoList.list(term, priority, case_sensitive, completed)`. Todo: helpers/aliases (below)
 -   `listall|lsa` - Current: `TodoList.list(null, null, null, true)` Todo: `TodoList.listAll(term, priority, case)` todo
 -   `listcon|lsc` - Todo. (Current: `TodoList.indexes.context`)

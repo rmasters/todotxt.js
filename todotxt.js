@@ -295,7 +295,7 @@ var todotxt = (function () {
      * @param {Integer} [...] - Task item id(s) to deprioritise
      * @return {TodoList}
      */
-    TodoList.prototype.do = function () {
+    TodoList.prototype.complete = function () {
         var item;
 
         for (var i = 0; i < arguments.length; i++) {
@@ -546,7 +546,7 @@ var todotxt = (function () {
                 this.indexes.project[item.projects[prj]].splice(prj_idx, 1);
 
                 // Remove project index when no tasks left that use it
-                if (Object.keys(this.indexes.project[item.projects[prj]]).length == 0) {
+                if (Object.keys(this.indexes.project[item.projects[prj]]).length === 0) {
                     delete this.indexes.project[item.projects[prj]];
                 }
             }
@@ -559,7 +559,7 @@ var todotxt = (function () {
                 this.indexes.context[item.contexts[ctx]].splice(ctx_idx, 1);
 
                 // Remove context index when no tasks left that use it
-                if (Object.keys(this.indexes.context[item.contexts[ctx]]).length == 0) {
+                if (Object.keys(this.indexes.context[item.contexts[ctx]]).length === 0) {
                     delete this.indexes.context[item.contexts[ctx]];
                 }
             }
