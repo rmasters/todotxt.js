@@ -23,6 +23,6 @@
         "jasmine-node": "1.0"
     },
     "scripts": {
-        "test": "jasmine-node spec/*"
+        "test": "jasmine-node spec/"
     }
 }
