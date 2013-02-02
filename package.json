@@ -1,6 +1,6 @@
 {
     "name": "todo.txt",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "A todo.txt-format parser and generator",
     "author": "Ross Masters (http://rossmasters.com/)",
     "keywords": ["todo", "todo.txt"],
